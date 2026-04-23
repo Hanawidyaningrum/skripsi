@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Voice Trainer - Smart Gate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-grad-1: #e0c3fc;
+            --bg-grad-2: #8ec5fc;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --primary: #4318FF;
+            --primary-glow: rgba(67, 24, 255, 0.15);
+            --green-main: #05CD99;
+            --green-bg: rgba(5, 205, 153, 0.1);
+            --red-main: #EE5D50;
+            --red-bg: rgba(238, 93, 80, 0.1);
+            --text-main: #2B3674;
+            --text-muted: #8F9BBA;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .app-container {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lock-icon-container {
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4318FF, #868CFF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px var(--primary-glow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-5px); }
+        }
+
+        .lock-icon-container i { color: white; }
+
+        h1 { font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
+
+        .subtitle { color: var(--text-muted); letter-spacing: 2px; font-weight: 600; }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--green-bg);
+            color: var(--green-main);
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(5, 205, 153, 0.1);
+        }
+
+        .status-badge .dot {
+            border-radius: 50%;
+            background-color: var(--green-main);
+            box-shadow: 0 0 8px var(--green-main);
+        }
+
+        /* COMMAND SECTION */
+        .section-title {
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* PANDUAN BOX */
+        .panduan-box {
+            border: 1.5px dashed var(--primary);
+            border-radius: 14px;
+            background: rgba(67, 24, 255, 0.04);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .panduan-box i { color: var(--primary); flex-shrink: 0; margin-top: 1px; }
+
+        .panduan-box p {
+            color: var(--primary);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* INPUT */
+        .input-wrap { position: relative; width: 100%; }
+
+        .input-wrap .input-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .input-wrap input[type="text"] {
+            width: 100%;
+            background: white;
+            border: 1.5px solid rgba(143, 155, 186, 0.3);
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .input-wrap input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 24, 255, 0.08);
+        }
+
+        .input-wrap input[type="text"]::placeholder { color: rgba(143, 155, 186, 0.7); }
+
+        /* CARDS */
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; }
+
+        .cmd-card {
+            background-color: white;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+            border: 2px solid transparent;
+        }
+
+        .cmd-card.green { border-color: var(--green-bg); }
+        .cmd-card.red   { border-color: var(--red-bg); }
+
+        .cmd-card .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .cmd-card.green .card-icon { background-color: var(--green-bg); color: var(--green-main); }
+        .cmd-card.red   .card-icon { background-color: var(--red-bg);   color: var(--red-main); }
+
+        .cmd-card .title { font-weight: 700; color: var(--text-main); }
+        .cmd-card .desc  { color: var(--text-muted); font-weight: 500; }
+
+        /* MIC SECTION */
+        .mic-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-mic {
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #868CFF);
+            border: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 15px 30px var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-mic:active { transform: scale(0.95); }
+
+        .btn-mic.recording {
+            background: linear-gradient(135deg, var(--red-main), #FF8A80);
+            animation: pulse-record 1.5s infinite;
+        }
+
+        @keyframes pulse-record {
+            0%   { box-shadow: 0 0 0 0 rgba(238, 93, 80, 0.5); }
+            70%  { box-shadow: 0 0 0 25px rgba(238, 93, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(238, 93, 80, 0); }
+        }
+
+        .mic-text { color: var(--primary); font-weight: 600; }
+        .dots { color: var(--text-muted); letter-spacing: 3px; opacity: 0.5; }
+
+        /* STATUS BAR */
+        .status-bar {
+            background-color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-main);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .status-bar .dot-small {
+            background-color: #CBD5E1;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: background-color 0.3s;
+        }
+
+        /* NAV LINK */
+        .nav-link {
+            text-align: center;
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 12px;
+        }
+
+        /* ============================================================
+           MOBILE  ≤ 768px
+           ============================================================ */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 20px;
+                justify-content: space-between;
+            }
+
+            /* Header */
+            .header { margin-bottom: 5px; }
+            .lock-icon-container { width: 60px; height: 60px; margin-bottom: 10px; }
+            .lock-icon-container i { font-size: 22px; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 10px; margin-top: 2px; margin-bottom: 8px; }
+            .status-badge { gap: 6px; padding: 4px 12px; font-size: 11px; }
+            .status-badge .dot { width: 6px; height: 6px; }
+
+            /* Card section */
+            .command-section {
+                background-color: var(--card-bg);
+                border-radius: 25px;
+                padding: 15px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+                border: 1px solid rgba(255,255,255,0.4);
+                margin: 10px 0;
+                gap: 0;
+            }
+
+            .section-title { font-size: 11px; }
+
+            .panduan-box { padding: 10px 12px; }
+            .panduan-box i { font-size: 13px; }
+            .panduan-box p { font-size: 11px; }
+
+            .input-wrap input[type="text"] { padding: 11px 12px 11px 36px; font-size: 12px; border-radius: 12px; }
+            .input-wrap .input-icon { left: 13px; font-size: 13px; }
+
+            .cards-grid { gap: 10px; }
+            .cmd-card { padding: 12px 5px; gap: 5px; }
+            .cmd-card .card-icon { width: 36px; height: 36px; font-size: 16px; border-radius: 9px; }
+            .cmd-card .title { font-size: 12px; }
+            .cmd-card .desc  { font-size: 10px; }
+
+            .btn-mic { width: 65px; height: 65px; font-size: 24px; margin-bottom: 8px; }
+            .mic-text { font-size: 12px; }
+            .dots { font-size: 16px; line-height: 10px; margin-top: 4px; }
+
+            .status-bar { padding: 12px 15px; gap: 10px; font-size: 11px; }
+            .status-bar .dot-small { width: 8px; height: 8px; }
+
+            .nav-link { padding: 10px; font-size: 12px; }
+        }
+
+        /* ============================================================
+           LAPTOP / DESKTOP  ≥ 769px
+           ============================================================ */
+        @media (min-width: 769px) {
+            body { padding: 40px; overflow: auto; }
+
+            .app-container {
+                max-width: 450px;
+                height: auto;
+                min-height: 80vh;
+                background-color: var(--card-bg);
+                border-radius: 40px;
+                padding: 40px 50px;
+                box-shadow: 0 30px 60px rgba(33, 20, 100, 0.1);
+                border: 1px solid rgba(255,255,255,0.5);
+            }
+
+            .header { margin-bottom: 30px; }
+            .lock-icon-container { width: 80px; height: 80px; margin-bottom: 20px; }
+            .lock-icon-container i { font-size: 28px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 11px; margin-top: 5px; margin-bottom: 15px; }
+            .status-badge { gap: 8px; padding: 6px 18px; font-size: 12px; }
+            .status-badge .dot { width: 8px; height: 8px; }
+
+            .command-section {
+                padding: 0;
+                background: transparent;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-title { font-size: 12px; }
+
+            .panduan-box { padding: 14px 16px; }
+            .panduan-box i { font-size: 14px; }
+            .panduan-box p { font-size: 12px; }
+
+            .input-wrap input[type="text"] { padding: 14px 14px 14px 42px; font-size: 14px; }
+            .input-wrap .input-icon { left: 15px; font-size: 15px; }
+
+            .cards-grid { gap: 15px; }
+            .cmd-card { padding: 20px 10px; gap: 8px; }
+            .cmd-card .card-icon { width: 48px; height: 48px; font-size: 22px; border-radius: 12px; }
+            .cmd-card .title { font-size: 14px; }
+            .cmd-card .desc  { font-size: 11px; }
+
+            .mic-section { margin-top: 10px; }
+            .btn-mic { width: 80px; height: 80px; font-size: 28px; margin-bottom: 15px; }
+            .mic-text { font-size: 14px; margin-bottom: 5px; }
+            .dots { font-size: 20px; line-height: 12px; margin-bottom: 5px; }
+
+            .status-bar { padding: 16px 20px; gap: 12px; font-size: 13px; }
+            .status-bar .dot-small { width: 10px; height: 10px; }
+
+            .nav-link { margin-top: 25px; padding: 12px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="lock-icon-container">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <h1>Voice Trainer AI</h1>
+        <div class="subtitle">REGISTRASI SIDIK SUARA MASTER</div>
+        <div class="status-badge">
+            <span class="dot"></span> Sistem aktif
+        </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="command-section">
+
+        <h3 class="section-title">PANDUAN REGISTRASI</h3>
+
+        <!-- Panduan Box -->
+        <div class="panduan-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>Ketik nama, ketuk ikon mikrofon, lalu ucapkan kalimat dengan jelas.</p>
+        </div>
+
+        <!-- Input Nama -->
+        <div class="input-wrap">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" id="nama_user" placeholder="Ketik Nama (Cth: Hana)" autocomplete="off">
+        </div>
+
+        <h3 class="section-title">PILIH PERINTAH SUARA</h3>
+
+        <!-- Cards Buka / Tutup Pagar -->
+        <div class="cards-grid">
+            <div class="cmd-card green" id="card-buka" onclick="selectCard('buka')">
+                <div class="card-icon"><i class="fa-solid fa-door-open"></i></div>
+                <p class="title">Buka pagar</p>
+                <span class="desc">Akses masuk</span>
+            </div>
+            <div class="cmd-card red" id="card-tutup" onclick="selectCard('tutup')">
+                <div class="card-icon"><i class="fa-solid fa-door-closed"></i></div>
+                <p class="title">Tutup pagar</p>
+                <span class="desc">Kunci kembali</span>
+            </div>
+        </div>
+
+        <!-- Mic Section -->
+        <div class="mic-section">
+            <button id="btnRecord" class="btn-mic">
+                <i class="fa-solid fa-microphone"></i>
+            </button>
+            <div id="mic-text" class="mic-text">Ketuk untuk merekam</div>
+            <div class="dots">.......</div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="status-dot" class="dot-small"></span>
+            <span id="status">Sistem siap merekam profil baru.</span>
+        </div>
+
+    </div>
+
+    <a href="/" class="nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Kembali ke Smart Gate
+    </a>
+
+</div>
+
+<script>
+    let mediaRecorder;
+    let audioChunks = [];
+    let selectedCommand = null;
+
+    const btnRecord  = document.getElementById('btnRecord');
+    const statusText = document.getElementById('status');
+    const micText    = document.getElementById('mic-text');
+    const statusDot  = document.getElementById('status-dot');
+    const inputNama  = document.getElementById('nama_user');
+
+    function selectCard(cmd) {
+        selectedCommand = cmd;
+        document.getElementById('card-buka').style.opacity  = cmd === 'buka'  ? '1' : '0.45';
+        document.getElementById('card-tutup').style.opacity = cmd === 'tutup' ? '1' : '0.45';
+        statusText.innerText = `Perintah dipilih: "${cmd === 'buka' ? 'Buka pagar' : 'Tutup pagar'}". Sekarang rekam suara Anda.`;
+        statusDot.style.backgroundColor = '#4318FF';
+    }
+
+    btnRecord.onclick = async () => {
+        if (mediaRecorder && mediaRecorder.state === 'recording') {
+            mediaRecorder.stop();
+            btnRecord.classList.remove('recording');
+            btnRecord.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+            micText.innerText = 'Ketuk untuk merekam';
+            micText.style.color = 'var(--primary)';
+            return;
+        }
+
+        const namaVal = inputNama.value.trim();
+        if (!namaVal) {
+            statusText.innerText = 'Harap ketik nama Anda terlebih dahulu!';
+            statusDot.style.backgroundColor = 'var(--red-main)';
+            inputNama.focus();
+            return;
+        }
+
+        if (!selectedCommand) {
+            statusText.innerText = 'Pilih perintah suara terlebih dahulu (Buka / Tutup pagar).';
+            statusDot.style.backgroundColor = 'var(--red-main)';
+            return;
+        }
+
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+
+        mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            const formData  = new FormData();
+            formData.append('audio',    audioBlob, 'enroll.webm');
+            formData.append('nama_user', namaVal);
+            formData.append('command',  selectedCommand);
+
+            statusText.innerText = 'Menyimpan ke memori AI...';
+            statusDot.style.backgroundColor = '#FBBF24';
+
+            try {
+                const response = await fetch('/api/enroll', { method: 'POST', body: formData });
+                const result   = await response.json();
+                statusText.innerText = result.msg;
+
+                if (result.status === 'success' || result.msg.toLowerCase().includes('berhasil')) {
+                    statusDot.style.backgroundColor = 'var(--green-main)';
+                } else {
+                    statusDot.style.backgroundColor = 'var(--red-main)';
+                }
+            } catch (err) {
+                statusText.innerText = 'Terjadi kesalahan saat menghubungi server.';
+                statusDot.style.backgroundColor = 'var(--red-main)';
+            }
+
+            audioChunks = [];
+        };
+
+        mediaRecorder.start();
+        btnRecord.classList.add('recording');
+        btnRecord.innerHTML = '<i class="fa-solid fa-stop"></i>';
+        micText.innerText = 'Merekam profil...';
+        micText.style.color = 'var(--red-main)';
+        statusText.innerText = `Merekam suara untuk "${namaVal}"...`;
+        statusDot.style.backgroundColor = 'var(--primary)';
+    };
+</script>.
+</body>
+</html>

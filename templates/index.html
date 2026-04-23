@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Smart Gate Controller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-grad-1: #e0c3fc;
+            --bg-grad-2: #8ec5fc;
+            --card-bg: rgba(255, 255, 255, 0.85); 
+            --primary: #4318FF; 
+            --primary-glow: rgba(67, 24, 255, 0.15);
+            --green-main: #05CD99;
+            --green-bg: rgba(5, 205, 153, 0.1);
+            --red-main: #EE5D50;
+            --red-bg: rgba(238, 93, 80, 0.1);
+            --text-main: #2B3674;
+            --text-muted: #8F9BBA;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Gunakan dvh (dynamic viewport) agar pas dengan layar HP */
+            min-height: 100vh;
+            min-height: 100dvh; 
+            box-sizing: border-box;
+            background-attachment: fixed;
+            overflow: hidden; /* Mencegah scroll global */
+        }
+
+        /* Container Utama */
+        .app-container {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-sizing: border-box;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* --- HEADER SECTION --- */
+        .header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lock-icon-container {
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4318FF, #868CFF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px var(--primary-glow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .lock-icon-container i { color: white; }
+
+        h1 {
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--green-bg);
+            color: var(--green-main);
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(5, 205, 153, 0.1);
+        }
+
+        .status-badge .dot {
+            border-radius: 50%;
+            background-color: var(--green-main);
+            box-shadow: 0 0 8px var(--green-main);
+        }
+
+        /* --- COMMAND CARDS --- */
+        .section-title {
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            margin-top: 0;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .cmd-card {
+            background-color: white;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .cmd-card.green { border-color: var(--green-bg); }
+        .cmd-card.red { border-color: var(--red-bg); }
+        .cmd-card.green i { background-color: var(--green-bg); color: var(--green-main); }
+        .cmd-card.red i { background-color: var(--red-bg); color: var(--red-main); }
+
+        .cmd-card .title { font-weight: 700; margin: 0; color: var(--text-main); }
+        .cmd-card .desc { color: var(--text-muted); font-weight: 500; }
+
+        /* --- MIC SECTION --- */
+        .mic-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-mic {
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #868CFF);
+            border: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 15px 30px var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-mic:active { transform: scale(0.95); }
+
+        .btn-mic.recording {
+            background: linear-gradient(135deg, var(--red-main), #FF8A80);
+            animation: pulse-record 1.5s infinite;
+        }
+
+        @keyframes pulse-record {
+            0% { box-shadow: 0 0 0 0 rgba(238, 93, 80, 0.5); }
+            70% { box-shadow: 0 0 0 25px rgba(238, 93, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(238, 93, 80, 0); }
+        }
+
+        .mic-text { color: var(--primary); font-weight: 600; }
+        .dots { color: var(--text-muted); letter-spacing: 3px; line-height: 10px; opacity: 0.5; margin: 0; }
+
+        /* --- STATUS BAR --- */
+        .status-bar {
+            background-color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-main);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .status-bar .dot-small {
+            background-color: #CBD5E1;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: background-color 0.3s;
+        }
+
+        .nav-link {
+            text-align: center;
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 12px;
+        }
+
+        /* =========================================
+           MEDIA QUERIES - HP (Max 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 20px; /* Kurangi padding agar luas */
+                justify-content: space-between; /* Menyebar elemen dari atas ke bawah */
+            }
+            .header { margin-bottom: 5px; }
+            .lock-icon-container { width: 60px; height: 60px; margin-bottom: 10px; }
+            .lock-icon-container i { font-size: 22px; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 10px; margin-top: 2px; margin-bottom: 8px; }
+            .status-badge { gap: 6px; padding: 4px 12px; font-size: 11px; }
+            .status-badge .dot { width: 6px; height: 6px; }
+
+            .command-section {
+                background-color: var(--card-bg);
+                border-radius: 25px;
+                padding: 15px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly; /* Jarak otomatis merata tanpa scroll */
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+                border: 1px solid rgba(255,255,255,0.4);
+                margin: 10px 0;
+            }
+
+            .section-title { font-size: 11px; margin-bottom: 0px; }
+            .cards-grid { gap: 10px; }
+            .cmd-card { padding: 12px 5px; gap: 6px; }
+            .cmd-card i { font-size: 18px; padding: 8px; border-radius: 10px; }
+            .cmd-card .title { font-size: 13px; }
+            .cmd-card .desc { font-size: 10px; }
+
+            .btn-mic { width: 65px; height: 65px; font-size: 24px; margin-bottom: 8px; }
+            .mic-text { font-size: 12px; margin-bottom: 0px; }
+            .dots { font-size: 16px; margin-top: 5px;}
+
+            .status-bar { padding: 12px 15px; gap: 10px; font-size: 11px; }
+            .status-bar .dot-small { width: 8px; height: 8px; }
+
+            .nav-link { margin-top: 0px; padding: 10px; font-size: 12px; }
+        }
+
+        /* =========================================
+           MEDIA QUERIES - LAPTOP (Min 769px)
+           ========================================= */
+        @media (min-width: 769px) {
+            body { padding: 40px; overflow: auto; } /* Di laptop boleh scroll kalau layarnya kecil */
+            .app-container {
+                max-width: 450px;
+                height: auto;
+                min-height: 80vh;
+                background-color: var(--card-bg);
+                border-radius: 40px;
+                padding: 40px 50px;
+                box-shadow: 0 30px 60px rgba(33, 20, 100, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+            }
+            .header { margin-bottom: 30px; }
+            .lock-icon-container { width: 80px; height: 80px; margin-bottom: 20px; }
+            .lock-icon-container i { font-size: 28px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 11px; margin-top: 5px; margin-bottom: 15px; }
+            .status-badge { gap: 8px; padding: 6px 18px; font-size: 12px; }
+            .status-badge .dot { width: 8px; height: 8px; }
+
+            .command-section { padding: 0; background: transparent; }
+            .section-title { font-size: 12px; margin-bottom: 20px; }
+            .cards-grid { gap: 15px; }
+            .cmd-card { padding: 20px 10px; gap: 10px; }
+            .cmd-card i { font-size: 24px; padding: 12px; border-radius: 12px; }
+            .cmd-card .title { font-size: 15px; }
+            .cmd-card .desc { font-size: 11px; }
+
+            .mic-section { margin-top: 40px; margin-bottom: 30px; }
+            .btn-mic { width: 80px; height: 80px; font-size: 28px; margin-bottom: 20px; }
+            .mic-text { font-size: 14px; margin-bottom: 5px; }
+            .dots { font-size: 20px; margin-bottom: 15px;}
+
+            .status-bar { padding: 16px 20px; gap: 12px; font-size: 13px; }
+            .status-bar .dot-small { width: 10px; height: 10px; }
+
+            .nav-link { margin-top: 25px; padding: 12px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <div class="lock-icon-container">
+                <i class="fa-solid fa-house"></i> 
+            </div>
+            <h1>Smart Gate</h1>
+            <div class="subtitle">VOICE BIOMETRIC SECURITY</div>
+            <div class="status-badge">
+                <span class="dot"></span> Sistem aktif
+            </div>
+        </div>
+
+        <div class="command-section">
+            <h3 class="section-title">PERINTAH SUARA TERSEDIA</h3>
+            
+            <div class="cards-grid">
+                <div class="cmd-card green">
+                    <i class="fa-solid fa-door-open"></i>
+                    <p class="title">Buka pagar</p>
+                    <span class="desc">Akses masuk</span>
+                </div>
+                <div class="cmd-card red">
+                    <i class="fa-solid fa-door-closed"></i>
+                    <p class="title">Tutup pagar</p>
+                    <span class="desc">Kunci kembali</span>
+                </div>
+            </div>
+
+            <div class="mic-section">
+                <button id="btnCommand" class="btn-mic">
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+                <div id="mic-text" class="mic-text">Ketuk untuk merekam</div>
+                <div class="dots">.......</div>
+            </div>
+
+            <div class="status-bar">
+                <span id="status-dot" class="dot-small"></span> 
+                <span id="status">Sistem siap. Ketuk mikrofon untuk memulai.</span>
+            </div>
+        </div>
+
+        <a href="/trainer" class="nav-link"><i class="fa-solid fa-fingerprint"></i> Setup Suara Baru (Trainer)</a>
+    </div>
+
+    <script>
+        let mediaRecorder; 
+        let audioChunks = [];
+        const btnCommand = document.getElementById('btnCommand');
+        const statusText = document.getElementById('status');
+        const micText = document.getElementById('mic-text');
+        const statusDot = document.getElementById('status-dot');
+
+        btnCommand.onclick = async () => {
+            if (mediaRecorder && mediaRecorder.state === "recording") {
+                mediaRecorder.stop();
+                btnCommand.classList.remove("recording");
+                btnCommand.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+                micText.innerText = "Ketuk untuk merekam";
+                micText.style.color = "var(--primary)";
+                return;
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            
+            mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+            
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'command.webm');
+                
+                statusText.innerText = "Memverifikasi sidik suara...";
+                statusDot.style.backgroundColor = "#FBBF24"; 
+                
+                try {
+                    const response = await fetch('/api/command', { method: 'POST', body: formData });
+                    const result = await response.json();
+                    
+                    statusText.innerText = result.msg;
+                    if(result.status === "sukses") {
+                        statusDot.style.backgroundColor = "var(--green-main)";
+                    } else {
+                        statusDot.style.backgroundColor = "var(--red-main)";
+                    }
+                } catch (error) {
+                    statusText.innerText = "Gagal menghubungi server.";
+                    statusDot.style.backgroundColor = "var(--red-main)";
+                }
+                
+                audioChunks = []; 
+            };
+
+            mediaRecorder.start();
+            btnCommand.classList.add("recording");
+            btnCommand.innerHTML = '<i class="fa-solid fa-stop"></i>';
+            micText.innerText = "Merekam suara...";
+            micText.style.color = "var(--red-main)";
+            
+            statusText.innerText = "Mendengarkan... Ucapkan perintah dengan jelas.";
+            statusDot.style.backgroundColor = "var(--primary)";
+        };
+    </script>
+</body>
+</html>
