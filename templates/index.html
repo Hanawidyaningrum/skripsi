@@ -9,36 +9,69 @@
     
     <style>
         :root {
-            --bg-grad-1: #e0c3fc;
-            --bg-grad-2: #8ec5fc;
-            --card-bg: rgba(255, 255, 255, 0.85); 
-            --primary: #4318FF; 
-            --primary-glow: rgba(67, 24, 255, 0.15);
-            --green-main: #05CD99;
-            --green-bg: rgba(5, 205, 153, 0.1);
-            --red-main: #EE5D50;
-            --red-bg: rgba(238, 93, 80, 0.1);
-            --text-main: #2B3674;
-            --text-muted: #8F9BBA;
+            /* Pastel Sky Palette - dari gambar */
+            --sky-blue: #A8CFEC;
+            --blush-pink: #E8B4CB;
+            --lavender: #C4A8D4;
+            --soft-purple: #B09AC8;
+            --star-white: #F0EEFF;
+
+            --bg-grad-top: #A8CEED;
+            --bg-grad-mid: #D9B0CC;
+            --bg-grad-bot: #BFA8D8;
+
+            --card-bg: rgba(255, 248, 255, 0.80);
+            --primary: #8B6DB0;
+            --primary-glow: rgba(139, 109, 176, 0.25);
+            --green-main: #70B8A8;
+            --green-bg: rgba(112, 184, 168, 0.15);
+            --red-main: #D98BA0;
+            --red-bg: rgba(217, 139, 160, 0.15);
+            --text-main: #4A3A6B;
+            --text-muted: #9C8AB5;
+        }
+
+        /* Stars */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle ease-in-out infinite;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+            background: linear-gradient(175deg,
+                var(--bg-grad-top) 0%,
+                var(--bg-grad-mid) 50%,
+                var(--bg-grad-bot) 100%);
             color: var(--text-main);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Gunakan dvh (dynamic viewport) agar pas dengan layar HP */
             min-height: 100vh;
-            min-height: 100dvh; 
+            min-height: 100dvh;
             box-sizing: border-box;
             background-attachment: fixed;
-            overflow: hidden; /* Mencegah scroll global */
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Container Utama */
         .app-container {
             width: 100%;
             height: 100vh;
@@ -49,9 +82,11 @@
             box-sizing: border-box;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            z-index: 1;
         }
 
-        /* --- HEADER SECTION --- */
+        /* --- HEADER --- */
         .header {
             text-align: center;
             display: flex;
@@ -61,17 +96,17 @@
 
         .lock-icon-container {
             border-radius: 50%;
-            background: linear-gradient(135deg, #4318FF, #868CFF);
+            background: linear-gradient(135deg, var(--soft-purple), var(--blush-pink));
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 20px var(--primary-glow);
+            box-shadow: 0 10px 25px var(--primary-glow);
             animation: float 3s ease-in-out infinite;
         }
 
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-6px); }
             100% { transform: translateY(0px); }
         }
 
@@ -93,11 +128,12 @@
         .status-badge {
             display: inline-flex;
             align-items: center;
-            background-color: var(--green-bg);
+            background: linear-gradient(135deg, rgba(112,184,168,0.2), rgba(168,206,237,0.2));
             color: var(--green-main);
             border-radius: 50px;
             font-weight: 600;
-            box-shadow: 0 4px 10px rgba(5, 205, 153, 0.1);
+            border: 1px solid rgba(112,184,168,0.3);
+            box-shadow: 0 4px 12px rgba(112,184,168,0.15);
         }
 
         .status-badge .dot {
@@ -121,22 +157,24 @@
         }
 
         .cmd-card {
-            background-color: white;
+            background: rgba(255, 250, 255, 0.75);
             border-radius: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
-            transition: transform 0.3s ease;
-            border: 2px solid transparent;
+            box-shadow: 0 8px 24px rgba(139, 109, 176, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1.5px solid rgba(196, 168, 212, 0.3);
+            backdrop-filter: blur(10px);
         }
 
-        .cmd-card.green { border-color: var(--green-bg); }
-        .cmd-card.red { border-color: var(--red-bg); }
-        .cmd-card.green i { background-color: var(--green-bg); color: var(--green-main); }
-        .cmd-card.red i { background-color: var(--red-bg); color: var(--red-main); }
+        .cmd-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(139, 109, 176, 0.15); }
+        .cmd-card.green { border-color: rgba(112, 184, 168, 0.4); }
+        .cmd-card.red { border-color: rgba(217, 139, 160, 0.4); }
+        .cmd-card.green i { background: linear-gradient(135deg, rgba(112,184,168,0.2), rgba(168,206,237,0.2)); color: var(--green-main); }
+        .cmd-card.red i { background: linear-gradient(135deg, rgba(217,139,160,0.2), rgba(196,168,212,0.2)); color: var(--red-main); }
 
         .cmd-card .title { font-weight: 700; margin: 0; color: var(--text-main); }
         .cmd-card .desc { color: var(--text-muted); font-weight: 500; }
@@ -152,11 +190,11 @@
 
         .btn-mic {
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #868CFF);
+            background: linear-gradient(135deg, var(--soft-purple), var(--blush-pink));
             border: none;
             color: white;
             cursor: pointer;
-            box-shadow: 0 15px 30px var(--primary-glow);
+            box-shadow: 0 15px 35px var(--primary-glow);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             justify-content: center;
@@ -166,29 +204,31 @@
         .btn-mic:active { transform: scale(0.95); }
 
         .btn-mic.recording {
-            background: linear-gradient(135deg, var(--red-main), #FF8A80);
+            background: linear-gradient(135deg, var(--red-main), #E8A0B8);
             animation: pulse-record 1.5s infinite;
         }
 
         @keyframes pulse-record {
-            0% { box-shadow: 0 0 0 0 rgba(238, 93, 80, 0.5); }
-            70% { box-shadow: 0 0 0 25px rgba(238, 93, 80, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(238, 93, 80, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(217, 139, 160, 0.5); }
+            70% { box-shadow: 0 0 0 25px rgba(217, 139, 160, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(217, 139, 160, 0); }
         }
 
         .mic-text { color: var(--primary); font-weight: 600; }
-        .dots { color: var(--text-muted); letter-spacing: 3px; line-height: 10px; opacity: 0.5; margin: 0; }
+        .dots { color: var(--blush-pink); letter-spacing: 3px; line-height: 10px; opacity: 0.6; margin: 0; }
 
         /* --- STATUS BAR --- */
         .status-bar {
-            background-color: white;
+            background: rgba(255, 250, 255, 0.75);
             border-radius: 16px;
             display: flex;
             align-items: center;
             font-weight: 500;
             color: var(--text-main);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 5px 15px rgba(139, 109, 176, 0.06);
+            border: 1px solid rgba(196, 168, 212, 0.3);
+            text-align: left;
+            backdrop-filter: blur(10px);
         }
 
         .status-bar .dot-small {
@@ -204,17 +244,22 @@
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
-            background-color: rgba(255,255,255,0.5);
+            background: rgba(255, 250, 255, 0.5);
             border-radius: 12px;
+            transition: background-color 0.3s;
+            border: 1px solid rgba(196, 168, 212, 0.2);
         }
+
+        .nav-link:hover { background-color: rgba(255, 250, 255, 0.8); }
 
         /* =========================================
            MEDIA QUERIES - HP (Max 768px)
            ========================================= */
         @media (max-width: 768px) {
+            body { overflow: hidden; }
             .app-container {
-                padding: 20px; /* Kurangi padding agar luas */
-                justify-content: space-between; /* Menyebar elemen dari atas ke bawah */
+                padding: 20px;
+                justify-content: space-between;
             }
             .header { margin-bottom: 5px; }
             .lock-icon-container { width: 60px; height: 60px; margin-bottom: 10px; }
@@ -225,16 +270,17 @@
             .status-badge .dot { width: 6px; height: 6px; }
 
             .command-section {
-                background-color: var(--card-bg);
+                background: rgba(255, 250, 255, 0.65);
                 border-radius: 25px;
                 padding: 15px;
                 flex-grow: 1;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-evenly; /* Jarak otomatis merata tanpa scroll */
-                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-                border: 1px solid rgba(255,255,255,0.4);
+                justify-content: space-evenly;
+                box-shadow: 0 10px 30px rgba(139, 109, 176, 0.08);
+                border: 1px solid rgba(196, 168, 212, 0.35);
                 margin: 10px 0;
+                backdrop-filter: blur(12px);
             }
 
             .section-title { font-size: 11px; margin-bottom: 0px; }
@@ -246,7 +292,7 @@
 
             .btn-mic { width: 65px; height: 65px; font-size: 24px; margin-bottom: 8px; }
             .mic-text { font-size: 12px; margin-bottom: 0px; }
-            .dots { font-size: 16px; margin-top: 5px;}
+            .dots { font-size: 16px; margin-top: 5px; }
 
             .status-bar { padding: 12px 15px; gap: 10px; font-size: 11px; }
             .status-bar .dot-small { width: 8px; height: 8px; }
@@ -258,51 +304,59 @@
            MEDIA QUERIES - LAPTOP (Min 769px)
            ========================================= */
         @media (min-width: 769px) {
-            body { padding: 40px; overflow: auto; } /* Di laptop boleh scroll kalau layarnya kecil */
+            body { padding: 40px; overflow: auto; }
             .app-container {
-                max-width: 450px;
+                max-width: 1000px;
                 height: auto;
-                min-height: 80vh;
-                background-color: var(--card-bg);
+                min-height: 85vh;
+                background: rgba(255, 250, 255, 0.70);
                 border-radius: 40px;
-                padding: 40px 50px;
-                box-shadow: 0 30px 60px rgba(33, 20, 100, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                padding: 50px 80px;
+                box-shadow: 0 30px 60px rgba(139, 109, 176, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                backdrop-filter: blur(20px);
             }
-            .header { margin-bottom: 30px; }
-            .lock-icon-container { width: 80px; height: 80px; margin-bottom: 20px; }
-            .lock-icon-container i { font-size: 28px; }
-            h1 { font-size: 26px; }
-            .subtitle { font-size: 11px; margin-top: 5px; margin-bottom: 15px; }
-            .status-badge { gap: 8px; padding: 6px 18px; font-size: 12px; }
-            .status-badge .dot { width: 8px; height: 8px; }
+            .header { margin-bottom: 40px; }
+            .lock-icon-container { width: 100px; height: 100px; margin-bottom: 25px; }
+            .lock-icon-container i { font-size: 40px; }
+            h1 { font-size: 50px; }
+            .subtitle { font-size: 14px; margin-top: 5px; margin-bottom: 20px; }
+            .status-badge { gap: 8px; padding: 8px 20px; font-size: 15px; }
+            .status-badge .dot { width: 10px; height: 10px; }
 
             .command-section { padding: 0; background: transparent; }
-            .section-title { font-size: 12px; margin-bottom: 20px; }
-            .cards-grid { gap: 15px; }
-            .cmd-card { padding: 20px 10px; gap: 10px; }
-            .cmd-card i { font-size: 24px; padding: 12px; border-radius: 12px; }
-            .cmd-card .title { font-size: 15px; }
-            .cmd-card .desc { font-size: 11px; }
+            .section-title { font-size: 15px; margin-bottom: 25px; }
 
-            .mic-section { margin-top: 40px; margin-bottom: 30px; }
-            .btn-mic { width: 80px; height: 80px; font-size: 28px; margin-bottom: 20px; }
-            .mic-text { font-size: 14px; margin-bottom: 5px; }
-            .dots { font-size: 20px; margin-bottom: 15px;}
+            .cards-grid { gap: 30px; }
+            .cmd-card { padding: 30px 15px; gap: 15px; }
+            .cmd-card i { font-size: 40px; padding: 15px; border-radius: 15px; }
+            .cmd-card .title { font-size: 20px; }
+            .cmd-card .desc { font-size: 16px; }
 
-            .status-bar { padding: 16px 20px; gap: 12px; font-size: 13px; }
-            .status-bar .dot-small { width: 10px; height: 10px; }
+            .mic-section { margin-top: 50px; margin-bottom: 40px; }
+            .btn-mic { width: 120px; height: 120px; font-size: 45px; margin-bottom: 25px; }
+            .mic-text { font-size: 20px; margin-bottom: 5px; }
+            .dots { font-size: 26px; margin-bottom: 15px; }
 
-            .nav-link { margin-top: 25px; padding: 12px; font-size: 13px; }
+            .status-bar { padding: 25px; gap: 15px; font-size: 16px; margin-bottom: 20px; }
+            .status-bar .dot-small { width: 14px; height: 14px; }
+
+            .nav-link { margin-top: auto; padding: 18px; font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Bintang-bintang -->
+    <div class="stars" id="stars"></div>
+
     <div class="app-container">
         <div class="header">
             <div class="lock-icon-container">
-                <i class="fa-solid fa-house"></i> 
+                <i class="fa-solid fa-house"></i>
             </div>
             <h1>Smart Gate</h1>
             <div class="subtitle">VOICE BIOMETRIC SECURITY</div>
@@ -313,7 +367,6 @@
 
         <div class="command-section">
             <h3 class="section-title">PERINTAH SUARA TERSEDIA</h3>
-            
             <div class="cards-grid">
                 <div class="cmd-card green">
                     <i class="fa-solid fa-door-open"></i>
@@ -336,16 +389,37 @@
             </div>
 
             <div class="status-bar">
-                <span id="status-dot" class="dot-small"></span> 
+                <span id="status-dot" class="dot-small"></span>
                 <span id="status">Sistem siap. Ketuk mikrofon untuk memulai.</span>
             </div>
         </div>
 
         <a href="/trainer" class="nav-link"><i class="fa-solid fa-fingerprint"></i> Setup Suara Baru (Trainer)</a>
+<a href="/logout" class="nav-link" style="margin-top: 8px; color: var(--red-main); border-color: rgba(139, 109, 176, 0.15);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
     </div>
 
     <script>
-        let mediaRecorder; 
+        // Generate bintang
+        const starsContainer = document.getElementById('stars');
+        const starCount = 60;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1;
+            star.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+                animation-duration: ${Math.random() * 3 + 2}s;
+                animation-delay: ${Math.random() * 3}s;
+                opacity: ${Math.random() * 0.5 + 0.2};
+            `;
+            starsContainer.appendChild(star);
+        }
+
+        // Mic logic
+        let mediaRecorder;
         let audioChunks = [];
         const btnCommand = document.getElementById('btnCommand');
         const statusText = document.getElementById('status');
@@ -364,23 +438,23 @@
 
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             mediaRecorder = new MediaRecorder(stream);
-            
+
             mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-            
+
             mediaRecorder.onstop = async () => {
                 const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                 const formData = new FormData();
                 formData.append('audio', audioBlob, 'command.webm');
-                
+
                 statusText.innerText = "Memverifikasi sidik suara...";
-                statusDot.style.backgroundColor = "#FBBF24"; 
-                
+                statusDot.style.backgroundColor = "#D9B0CC";
+
                 try {
                     const response = await fetch('/api/command', { method: 'POST', body: formData });
                     const result = await response.json();
-                    
+
                     statusText.innerText = result.msg;
-                    if(result.status === "sukses") {
+                    if (result.status === "success") {
                         statusDot.style.backgroundColor = "var(--green-main)";
                     } else {
                         statusDot.style.backgroundColor = "var(--red-main)";
@@ -389,8 +463,8 @@
                     statusText.innerText = "Gagal menghubungi server.";
                     statusDot.style.backgroundColor = "var(--red-main)";
                 }
-                
-                audioChunks = []; 
+
+                audioChunks = [];
             };
 
             mediaRecorder.start();
@@ -398,9 +472,9 @@
             btnCommand.innerHTML = '<i class="fa-solid fa-stop"></i>';
             micText.innerText = "Merekam suara...";
             micText.style.color = "var(--red-main)";
-            
+
             statusText.innerText = "Mendengarkan... Ucapkan perintah dengan jelas.";
-            statusDot.style.backgroundColor = "var(--primary)";
+            statusDot.style.backgroundColor = "var(--soft-purple)";
         };
     </script>
 </body>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login - Smart Gate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sky-blue: #A8CFEC;
+            --blush-pink: #E8B4CB;
+            --lavender: #C4A8D4;
+            --soft-purple: #B09AC8;
+
+            --bg-grad-top: #A8CEED;
+            --bg-grad-mid: #D9B0CC;
+            --bg-grad-bot: #BFA8D8;
+
+            --primary: #8B6DB0;
+            --primary-glow: rgba(139, 109, 176, 0.25);
+            --red-main: #D98BA0;
+            --text-main: #4A3A6B;
+            --text-muted: #9C8AB5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle ease-in-out infinite;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(175deg, var(--bg-grad-top) 0%, var(--bg-grad-mid) 50%, var(--bg-grad-bot) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 380px;
+            background: rgba(255, 250, 255, 0.80);
+            border-radius: 30px;
+            padding: 40px 32px;
+            box-shadow: 0 30px 60px rgba(139, 109, 176, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .lock-icon-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--soft-purple), var(--blush-pink));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 25px var(--primary-glow);
+        }
+
+        .lock-icon-container i { color: white; font-size: 32px; }
+
+        h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
+
+        .input-wrap { position: relative; margin-bottom: 16px; text-align: left; }
+
+        .input-wrap .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            padding: 13px 16px 13px 42px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1.5px solid rgba(196, 168, 212, 0.4);
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .input-wrap input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 109, 176, 0.12);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--soft-purple), var(--blush-pink));
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px var(--primary-glow);
+            transition: transform 0.2s;
+            margin-top: 6px;
+        }
+
+        .btn-login:active { transform: scale(0.97); }
+
+        .error-msg {
+            background: rgba(217, 139, 160, 0.12);
+            color: var(--red-main);
+            border: 1px solid rgba(217, 139, 160, 0.3);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="login-card">
+        <div class="lock-icon-container">
+            <i class="fa-solid fa-lock"></i>
+        </div>
+        <h1>Smart Gate</h1>
+        <div class="subtitle">MASUK UNTUK MELANJUTKAN</div>
+
+        {% if error %}
+        <div class="error-msg">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/login">
+            <div class="input-wrap">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+            </div>
+            <div class="input-wrap">
+                <i class="fa-solid fa-key input-icon"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn-login">Masuk</button>
+        </form>
+    </div>
+
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1;
+            star.style.cssText = `
+                width: ${size}px; height: ${size}px;
+                top: ${Math.random() * 100}%; left: ${Math.random() * 100}%;
+                animation-duration: ${Math.random() * 3 + 2}s;
+                animation-delay: ${Math.random() * 3}s;
+                opacity: ${Math.random() * 0.5 + 0.2};
+            `;
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
