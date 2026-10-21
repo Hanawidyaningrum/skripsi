@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Pastel Sky Palette - sama seperti index.html */
             --sky-blue: #A8CFEC;
             --blush-pink: #E8B4CB;
             --lavender: #C4A8D4;
@@ -32,7 +31,6 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Bintang */
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.3); }
@@ -84,7 +82,6 @@
             z-index: 1;
         }
 
-        /* HEADER */
         .header {
             text-align: center;
             display: flex;
@@ -130,7 +127,6 @@
             box-shadow: 0 0 8px var(--green-main);
         }
 
-        /* COMMAND SECTION */
         .section-title {
             color: var(--text-muted);
             letter-spacing: 1.5px;
@@ -138,7 +134,6 @@
             text-align: center;
         }
 
-        /* PANDUAN BOX */
         .panduan-box {
             border: 1.5px dashed var(--primary);
             border-radius: 14px;
@@ -156,7 +151,6 @@
             line-height: 1.5;
         }
 
-        /* INPUT */
         .input-wrap { position: relative; width: 100%; }
 
         .input-wrap .input-icon {
@@ -185,7 +179,6 @@
 
         .input-wrap input[type="text"]::placeholder { color: rgba(156, 138, 181, 0.7); }
 
-        /* CARDS */
         .cards-grid { display: grid; grid-template-columns: 1fr 1fr; }
 
         .cmd-card {
@@ -221,7 +214,6 @@
         .cmd-card .title { font-weight: 700; color: var(--text-main); }
         .cmd-card .desc  { color: var(--text-muted); font-weight: 500; }
 
-        /* MIC SECTION */
         .mic-section {
             text-align: center;
             display: flex;
@@ -259,7 +251,6 @@
         .mic-text { color: var(--primary); font-weight: 600; }
         .dots { color: var(--blush-pink); letter-spacing: 3px; opacity: 0.6; }
 
-        /* STATUS BAR */
         .status-bar {
             background: rgba(255, 250, 255, 0.75);
             border-radius: 16px;
@@ -279,7 +270,149 @@
             transition: background-color 0.3s;
         }
 
-        /* NAV LINK */
+        /* USER LIST (kelola pengguna) */
+        .user-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 200px;
+            min-height: 44px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .user-row {
+            background: rgba(255, 250, 255, 0.75);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(196, 168, 212, 0.3);
+        }
+
+        .user-row .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .user-row .user-avatar {
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--soft-purple), var(--blush-pink));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .user-row .user-text { min-width: 0; }
+
+        .user-row .user-name {
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-row .user-count { color: var(--text-muted); }
+
+        .user-row .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-edit-user,
+        .btn-delete-user {
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .btn-edit-user {
+            background: rgba(139, 109, 176, 0.15);
+            color: var(--primary);
+        }
+
+        .btn-edit-user:hover { background: rgba(139, 109, 176, 0.3); }
+
+        .btn-delete-user {
+            background: rgba(217, 139, 160, 0.15);
+            color: var(--red-main);
+        }
+
+        .btn-delete-user:hover { background: rgba(217, 139, 160, 0.3); }
+
+        .user-list-empty {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 12px;
+        }
+
+        /* TRAIN ADAPTER SECTION */
+        .train-box {
+            border-radius: 18px;
+            background: rgba(255, 250, 255, 0.75);
+            border: 1.5px solid rgba(196, 168, 212, 0.35);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .train-box p.train-desc {
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.5;
+            font-size: 12px;
+        }
+
+        .btn-train-adapter {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--soft-purple), var(--lavender));
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px var(--primary-glow);
+            transition: opacity 0.2s;
+        }
+
+        .btn-train-adapter:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .train-result {
+            display: none;
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .train-result.show { display: block; }
+        .train-result.ok   { background: var(--green-bg); color: var(--green-main); }
+        .train-result.fail { background: var(--red-bg); color: var(--red-main); }
+
         .nav-link {
             text-align: center;
             display: block;
@@ -294,9 +427,6 @@
 
         .nav-link:hover { background-color: rgba(255, 250, 255, 0.8); }
 
-        /* ============================================================
-           MOBILE  ≤ 768px
-           ============================================================ */
         @media (max-width: 768px) {
             body { overflow: hidden; }
             .app-container {
@@ -304,7 +434,6 @@
                 justify-content: space-between;
             }
 
-            /* Header */
             .header { margin-bottom: 5px; }
             .lock-icon-container { width: 60px; height: 60px; margin-bottom: 10px; }
             .lock-icon-container i { font-size: 22px; }
@@ -313,7 +442,6 @@
             .status-badge { gap: 6px; padding: 4px 12px; font-size: 11px; }
             .status-badge .dot { width: 6px; height: 6px; }
 
-            /* Card section */
             .command-section {
                 background: rgba(255, 250, 255, 0.65);
                 border-radius: 25px;
@@ -325,7 +453,8 @@
                 box-shadow: 0 10px 30px rgba(139, 109, 176, 0.08);
                 border: 1px solid rgba(196, 168, 212, 0.35);
                 margin: 10px 0;
-                gap: 0;
+                gap: 10px;
+                overflow-y: auto;
                 backdrop-filter: blur(12px);
             }
 
@@ -351,12 +480,21 @@
             .status-bar { padding: 12px 15px; gap: 10px; font-size: 11px; }
             .status-bar .dot-small { width: 8px; height: 8px; }
 
+            .user-row { padding: 8px 10px; }
+            .user-row .user-avatar { width: 28px; height: 28px; font-size: 11px; }
+            .user-row .user-name { font-size: 12px; }
+            .user-row .user-count { font-size: 10px; }
+            .user-row .user-actions { gap: 5px; }
+            .btn-edit-user,
+            .btn-delete-user { width: 30px; height: 30px; font-size: 12px; }
+            .user-list-empty { font-size: 11px; }
+
+            .btn-train-adapter { font-size: 12.5px; padding: 12px; }
+            .train-box { padding: 14px; }
+
             .nav-link { padding: 10px; font-size: 12px; margin-bottom: 0px; }
         }
 
-        /* ============================================================
-           LAPTOP / DESKTOP  ≥ 769px (LEBAR 1000px)
-           ============================================================ */
         @media (min-width: 769px) {
             body { padding: 40px; overflow: auto; }
 
@@ -411,13 +549,26 @@
             .status-bar { padding: 25px; gap: 15px; font-size: 16px; border-radius: 20px; }
             .status-bar .dot-small { width: 14px; height: 14px; }
 
+            .user-list { max-height: 260px; }
+            .user-row { padding: 12px 16px; }
+            .user-row .user-avatar { width: 40px; height: 40px; font-size: 15px; }
+            .user-row .user-name { font-size: 15px; }
+            .user-row .user-count { font-size: 12px; }
+            .user-row .user-actions { gap: 8px; }
+            .btn-edit-user,
+            .btn-delete-user { width: 38px; height: 38px; font-size: 15px; }
+            .user-list-empty { font-size: 13px; }
+
+            .btn-train-adapter { font-size: 16px; padding: 18px; }
+            .train-box { padding: 20px; }
+            .train-result { font-size: 14px; padding: 14px 16px; }
+
             .nav-link { margin-top: 30px; padding: 18px; font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
-<!-- Bintang-bintang -->
 <div class="stars" id="stars"></div>
 
 <div class="app-container">
@@ -426,7 +577,7 @@
         <div class="lock-icon-container">
             <i class="fa-solid fa-user-plus"></i>
         </div>
-        <h1>Voice Trainer AI</h1>
+        <h1>Voice Trainer</h1>
         <div class="subtitle">REGISTRASI SIDIK SUARA MASTER</div>
         <div class="status-badge">
             <span class="dot"></span> Sistem aktif
@@ -475,6 +626,22 @@
             <span id="status">Sistem siap merekam profil baru.</span>
         </div>
 
+        <h3 class="section-title">PENGGUNA TERDAFTAR</h3>
+
+        <div class="user-list" id="userList">
+            <div class="user-list-empty">Memuat daftar pengguna...</div>
+        </div>
+
+        <h3 class="section-title">LATIH ADAPTER SUARA</h3>
+
+        <div class="train-box">
+            <button id="btnTrainAdapter" class="btn-train-adapter">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span id="trainAdapterLabel">Latih Adapter Suara</span>
+            </button>
+            <div id="trainResult" class="train-result"></div>
+        </div>
+
     </div>
 
 <a href="/" class="nav-link">
@@ -487,7 +654,6 @@
 </div>
 
 <script>
-    // Generate bintang
     const starsContainer = document.getElementById('stars');
     const starCount = 60;
     for (let i = 0; i < starCount; i++) {
@@ -515,6 +681,7 @@
     const micText    = document.getElementById('mic-text');
     const statusDot  = document.getElementById('status-dot');
     const inputNama  = document.getElementById('nama_user');
+    const userListEl = document.getElementById('userList');
 
     function selectCard(cmd) {
         selectedCommand = cmd;
@@ -548,7 +715,15 @@
             return;
         }
 
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        let stream;
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        } catch (err) {
+            statusText.innerText = 'Izin mikrofon ditolak atau tidak tersedia di browser ini.';
+            statusDot.style.backgroundColor = 'var(--red-main)';
+            return;
+        }
+
         mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
 
@@ -559,20 +734,30 @@
             formData.append('nama_user', namaVal);
             formData.append('command',  selectedCommand);
 
-            statusText.innerText = 'Menyimpan ke memori AI...';
+            statusText.innerText = 'Menyimpan ke database';
             statusDot.style.backgroundColor = '#FBBF24';
 
             try {
                 const response = await fetch('/api/enroll', { method: 'POST', body: formData });
-                const result   = await response.json();
-                statusText.innerText = result.msg;
 
-                if (result.status === 'success' || result.msg.toLowerCase().includes('berhasil')) {
+                if (!response.ok) {
+                    statusText.innerText = `Server menolak permintaan (kode ${response.status}).`;
+                    statusDot.style.backgroundColor = 'var(--red-main)';
+                    audioChunks = [];
+                    return;
+                }
+
+                const result = await response.json();
+                statusText.innerText = result.msg || 'Selesai, namun tidak ada pesan dari server.';
+
+                if (result.status === 'success' || (result.msg || '').toLowerCase().includes('berhasil')) {
                     statusDot.style.backgroundColor = 'var(--green-main)';
+                    loadUsers();
                 } else {
                     statusDot.style.backgroundColor = 'var(--red-main)';
                 }
             } catch (err) {
+                console.error('enroll error:', err);
                 statusText.innerText = 'Terjadi kesalahan saat menghubungi server.';
                 statusDot.style.backgroundColor = 'var(--red-main)';
             }
@@ -587,6 +772,215 @@
         micText.style.color = 'var(--red-main)';
         statusText.innerText = `Merekam suara untuk "${namaVal}"...`;
         statusDot.style.backgroundColor = 'var(--soft-purple)';
+    };
+
+    // ===================== KELOLA PENGGUNA =====================
+
+    function getInitials(name) {
+        const clean = String(name || '?').replace(/_/g, ' ').trim();
+        const parts = clean.split(' ').filter(Boolean);
+        return parts.slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';
+    }
+
+    // Ambil nilai nama pengguna dan jumlah sampel dari berbagai kemungkinan
+    // nama field, karena beberapa versi API bisa memakai penamaan berbeda
+    // (nama_user / name / username, jumlah_sampel / sample_count / total).
+    function normalizeUser(u) {
+        const nama = u.nama_user ?? u.name ?? u.username ?? u.user ?? '(tanpa nama)';
+        const jumlah = u.jumlah_sampel ?? u.sample_count ?? u.total ?? u.count ?? 0;
+        return { nama_user: String(nama), jumlah_sampel: jumlah };
+    }
+
+    async function loadUsers() {
+        userListEl.innerHTML = '<div class="user-list-empty">Memuat daftar pengguna...</div>';
+        try {
+            // cache: 'no-store' mencegah browser (terutama di HP) menampilkan
+            // hasil lama yang tersimpan di cache saat data di server sudah berubah
+            const res = await fetch('/api/users', { cache: 'no-store' });
+
+            if (!res.ok) {
+                console.error('GET /api/users status:', res.status);
+                userListEl.innerHTML = `<div class="user-list-empty">Gagal memuat (kode ${res.status}). Coba muat ulang halaman.</div>`;
+                return;
+            }
+
+            let data;
+            try {
+                data = await res.json();
+            } catch (parseErr) {
+                console.error('JSON parse error:', parseErr);
+                userListEl.innerHTML = '<div class="user-list-empty">Respons server tidak valid.</div>';
+                return;
+            }
+
+            const rawUsers = Array.isArray(data) ? data : (data.users || []);
+            const users = rawUsers.map(normalizeUser);
+
+            if (users.length === 0) {
+                userListEl.innerHTML = '<div class="user-list-empty">Belum ada pengguna terdaftar.</div>';
+                return;
+            }
+
+            userListEl.innerHTML = '';
+            users.forEach(u => {
+                const displayName = u.nama_user.replace(/_/g, ' ');
+                const row = document.createElement('div');
+                row.className = 'user-row';
+                row.innerHTML = `
+                    <div class="user-info">
+                        <div class="user-avatar">${getInitials(u.nama_user)}</div>
+                        <div class="user-text">
+                            <div class="user-name">${displayName}</div>
+                            <div class="user-count">${u.jumlah_sampel} sampel suara</div>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn-edit-user" title="Ubah nama" aria-label="Ubah nama ${displayName}">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn-delete-user" title="Hapus pengguna" aria-label="Hapus ${displayName}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                row.querySelector('.btn-edit-user').onclick   = () => editUser(u.nama_user, displayName);
+                row.querySelector('.btn-delete-user').onclick = () => deleteUser(u.nama_user, displayName);
+                userListEl.appendChild(row);
+            });
+        } catch (err) {
+            console.error('loadUsers error:', err);
+            userListEl.innerHTML = '<div class="user-list-empty">Gagal memuat daftar pengguna. Periksa koneksi internet Anda.</div>';
+        }
+    }
+
+    async function editUser(namaUser, displayName) {
+        const inputBaru = prompt(`Ubah nama pengguna "${displayName}" menjadi:`, displayName);
+
+        // Dibatalkan (tekan Cancel)
+        if (inputBaru === null) return;
+
+        const namaBaru = inputBaru.trim();
+        if (!namaBaru) {
+            alert('Nama baru tidak boleh kosong.');
+            return;
+        }
+        if (namaBaru === displayName) return; // tidak ada perubahan
+
+        statusText.innerText = `Mengubah nama "${displayName}" menjadi "${namaBaru}"...`;
+        statusDot.style.backgroundColor = '#FBBF24';
+
+        try {
+            const formData = new FormData();
+            formData.append('nama_lama', namaUser);
+            formData.append('nama_baru', namaBaru);
+
+            const res = await fetch('/api/rename-user', { method: 'POST', body: formData });
+
+            if (!res.ok) {
+                statusText.innerText = `Gagal mengubah nama (kode ${res.status}).`;
+                statusDot.style.backgroundColor = 'var(--red-main)';
+                return;
+            }
+
+            const result = await res.json();
+            statusText.innerText = result.msg || 'Selesai.';
+            statusDot.style.backgroundColor = result.status === 'success' ? 'var(--green-main)' : 'var(--red-main)';
+
+            if (result.status === 'success') {
+                loadUsers();
+            }
+        } catch (err) {
+            console.error('editUser error:', err);
+            statusText.innerText = 'Gagal menghubungi server saat mengubah nama.';
+            statusDot.style.backgroundColor = 'var(--red-main)';
+        }
+    }
+
+    async function deleteUser(namaUser, displayName) {
+        const yakin = confirm(`Hapus pengguna "${displayName}"? Seluruh sampel suara dan data pengenalannya akan dihapus permanen.`);
+        if (!yakin) return;
+
+        statusText.innerText = `Menghapus "${displayName}"...`;
+        statusDot.style.backgroundColor = '#FBBF24';
+
+        try {
+            const formData = new FormData();
+            formData.append('nama_user', namaUser);
+            const res = await fetch('/api/delete-user', { method: 'POST', body: formData });
+
+            if (!res.ok) {
+                statusText.innerText = `Gagal menghapus (kode ${res.status}).`;
+                statusDot.style.backgroundColor = 'var(--red-main)';
+                return;
+            }
+
+            const result = await res.json();
+            statusText.innerText = result.msg || 'Selesai.';
+            statusDot.style.backgroundColor = result.status === 'success' ? 'var(--green-main)' : 'var(--red-main)';
+
+            if (result.status === 'success') {
+                loadUsers();
+            }
+        } catch (err) {
+            console.error('deleteUser error:', err);
+            statusText.innerText = 'Gagal menghubungi server saat menghapus pengguna.';
+            statusDot.style.backgroundColor = 'var(--red-main)';
+        }
+    }
+
+    // Muat ulang daftar pengguna setiap kali tab/halaman kembali terlihat
+    // (contoh: HP dikunci lalu dibuka lagi, atau berpindah tab lalu kembali)
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            loadUsers();
+        }
+    });
+
+    loadUsers();
+
+    // ===================== LATIH ADAPTER SUARA =====================
+
+    const btnTrainAdapter    = document.getElementById('btnTrainAdapter');
+    const trainAdapterLabel  = document.getElementById('trainAdapterLabel');
+    const trainResultEl      = document.getElementById('trainResult');
+
+    btnTrainAdapter.onclick = async () => {
+        const konfirmasi = confirm(
+            'Melatih adapter memakai SELURUH data pendaftaran yang ada dan ' +
+            'bisa memakan waktu beberapa menit. Selama proses ini berjalan, ' +
+            'jangan tutup halaman ini. Lanjutkan?'
+        );
+        if (!konfirmasi) return;
+
+        btnTrainAdapter.disabled = true;
+        trainAdapterLabel.innerText = 'Sedang melatih... mohon tunggu';
+        trainResultEl.className = 'train-result';
+        trainResultEl.innerText = '';
+
+        try {
+            const res = await fetch('/api/train_adapter', { method: 'POST' });
+
+            if (!res.ok) {
+                trainResultEl.classList.add('show', 'fail');
+                trainResultEl.innerText = `Server menolak permintaan (kode ${res.status}).`;
+                return;
+            }
+
+            const result = await res.json();
+            trainResultEl.classList.add('show', result.status === 'success' ? 'ok' : 'fail');
+            trainResultEl.innerText = result.msg || 'Selesai, namun tidak ada pesan dari server.';
+
+            if (result.status === 'success') {
+                loadUsers(); // jumlah sampel per user tidak berubah, tapi menyegarkan tampilan
+            }
+        } catch (err) {
+            console.error('train adapter error:', err);
+            trainResultEl.classList.add('show', 'fail');
+            trainResultEl.innerText = 'Terjadi kesalahan saat menghubungi server.';
+        } finally {
+            btnTrainAdapter.disabled = false;
+            trainAdapterLabel.innerText = 'Latih Adapter Suara';
+        }
     };
 </script>
 </body>

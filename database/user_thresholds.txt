@@ -1,0 +1,6 @@
+nama,threshold,sample_threshold,raw_dcf_threshold
+Ayah,0.76,0.6,0.5501
+Hana,0.76,0.6,0.4976
+Ibu,0.76,0.6,0.528
+Jannah,0.76,0.6644,0.6322
+Kamil,0.76,0.6,0.5847

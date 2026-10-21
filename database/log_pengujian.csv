@@ -1,0 +1,141 @@
+﻿Waktu;Pengguna Terdeteksi;Status;Cosine Similarity;Skor Web (%);Teks Terucap;Perintah Terkirim;Waktu Proses (detik)
+2026-09-26 12:23:22;Hana;Diterima Buka;0.7851;88;buka pagar;BUKA;1.28
+2026-09-26 12:23:28;Hana;Diterima Buka;0.9392;92;buka pagar sekarang;BUKA;1.45
+2026-09-26 12:24:30;Hana;Diterima Buka;0.8297;90;tolong buka pagar;BUKA;1.14
+2026-09-26 12:24:32;Hana;Diterima Buka;0.8139;81;segera buka pagar;BUKA;1.25
+2026-09-26 12:24:34;Hana;Diterima Tutup;0.8168;81;tutup pagar;TUTUP;1.07
+2026-09-26 12:24:37;anomali;0.5430;54;;;1.34
+2026-09-26 12:24:40;Hana;Diterima Tutup;0.827;82;tolong tutup pagar;TUTUP;1.22
+2026-09-26 12:24:43;Hana;Diterima Tutup;0.8316;83;segera tutup pagar;TUTUP;1.18
+2026-09-26 12:24:47;Hana;Diterima - Bukan Kata Kunci;0.7793;77;buka gerbang;;1.13
+2026-09-26 12:25:50;Hana;Diterima - Bukan Kata Kunci;0.7892;78;tutup gerbang;;1.08
+2026-09-26 14:07:32;Ayah;Diterima Buka;0.7772;77;buka pagar;BUKA;1.5
+2026-09-26 14:07:34;Ayah;Diterima Buka;0.7623;76;buka pagar sekarang;BUKA;1.51
+2026-09-24 14:07:37;Ayah;Diterima Buka;0.7977;79;tolong buka pagar;BUKA;1.64
+2026-09-26 14:07:40;Ayah;Diterima Buka;0.776;77;segera buka pagar;BUKA;1.39
+2026-09-26 14:07:45;Ayah;Diterima Tutup;0.8925;89;tutup pagar;TUTUP;1.94
+2026-09-26 14:07:50;Ayah;Diterima Tutup;0.7913;79;tutup pagar sekarang;TUTUP;1.78
+2026-09-26 14:07:56;Ayah;Diterima Tutup;0.7608;76;tolong tutup pagar;TUTUP;1.38
+"2026-09-26 14:08:08,Ayah;Diterima Tutup;0.7806;78;segera tutup pagar;TUTUP;2.12"
+2026-09-26 14:08:15;Ayah;Diterima - Bukan Kata Kunci;0.7643;76;buka gerbang;;1.30
+2026-09-26 14:08:15;anomali;Ditolak;0.6928;69;;;1.36
+2026-09-26 16:13:29;Ibu;Diterima Buka;0.8132;81;buka pagar;BUKA;1.44
+2026-09-28 16:13:32;anomali;Ditolak;0.51;51;;;1.71
+2026-09-26 16:13:48;Ibu;Diterima Buka;0.8297;82;tolong buka pagar;BUKA;1.14
+2026-09-26 16:13:52;Ibu;Diterima Buka;0.8139;81;segera buka pagar;BUKA;1.25
+2026-09-26 16:14:07;Ibu;Diterima Tutup;0.8966;89;tutup pagar;TUTUP;1.49
+2026-09-26 16:14:16;Ibu;Diterima Tutup;0.8986;89;tutup pagar sekarang;TUTUP;1.23
+2026-09-26 16:14:18;Ibu;Diterima Tutup;0.7954;79;tolong tutup pagar;TUTUP;1.20
+2026-09-26 16:14:20;Ibu;Diterima Tutup;0.8986;89;segera tutup pagar;TUTUP;1.23
+2026-09-26 16:14:30;anomali;Ditolak;0.5067;50;;;1.15
+2026-09-26 16:14:38;Ibu;Diterima - Bukan Kata Kunci;0.7678;76;tutup gerbang;;1.27
+2026-09-26 20:10:09;Kamil;Diterima Buka;0.7918;79;buka pagar;BUKA;1.65
+2026-09-26 20:10:14;anomali;Ditolak;0.7031;70;;;1.37
+2026-09-26 20:10:20;Kamil;Diterima Buka;0.7705;77;tolong buka pagar;BUKA;1.47
+2026-09-26 20:10:25;anomali;Ditolak;0.5672;56;;;1.25
+2026-09-26 20:10:28;Kamil;Diterima Tutup;0.7859;78;tutup pagar;TUTUP;1.55
+2026-09-26 20:10:33;Kamil;Diterima Tutup;0.8295;82;tutup pagar sekarang;TUTUP;1.34
+2026-09-26 20:10:40;Kamil;Diterima Tutup;0.7608;76;tolong tutup pagar;TUTUP;1.38
+2026-09-26 20:10:46;Kamil;Diterima Tutup;0.8139;81;segera tutup pagar;TUTUP;1.25
+2026-09-26 20:10:55;Kamil;Diterima - Bukan Kata Kunci;0.7793;77;buka gerbang;;1.15
+2026-09-26 20:11:09;Kamil;Diterima - Bukan Kata Kunci;0.7690;76;tutup gerbang;;1.13
+2026-09-27 13:32:22;Jannah;Diterima Buka;0.8210 ;81;buka pagar;BUKA;1.31
+2026-09-27 13:32:28;Jannah;Diterima Buka;0.8502;85;buka pagar sekarang;BUKA;1.34
+2026-09-27 13:32:34;Jannah;Diterima Buka;0.8516 ;85;tolong buka pagar;BUKA;1.16
+2026-09-27 13:32:48;Jannah;Diterima Buka; 0.8409 ;84;segera buka pagar;BUKA;1.95
+2026-09-27 13:32:52;Jannah;Diterima Tutup;0.8433 ;84;tutup pagar;TUTUP;1.58
+2026-09-27 13:32:58;Jannah;Diterima Tutup;0.8220 ;82;tutup pagar sekarang;TUTUP;1.37
+2026-09-27 13:32:06;Jannah;Diterima Tutup;0.8371 ;83;tolong tutup pagar;TUTUP;1.40
+2026-09-27 13:32:12;Jannah;Diterima Tutup;0.8326 ;83;segera tutup pagar;TUTUP;1.73
+2026-09-27 13:32:18;Jannah;Diterima - Bukan Kata Kunci;0.8572;85;buka gerbang;;1.75
+2026-09-27 13:32:25;Jannah;Diterima - Bukan Kata Kunci;0.8892;88;tutup gerbang;;1.08
+2026-09-28 10:57:35;anomali;Ditolak;0.4004;40;;;2.17
+2026-09-28 10:57:51;anomali;Ditolak;0.3982;39;;;1.68
+2026-09-28 10:58:04;anomali;Ditolak;0.4258;42;;;1.71
+2026-09-28 10:58:14;anomali;Ditolak;0.5862;58;;;1.82
+2026-09-28 10:58:25;anomali;Ditolak;0.4046;40;;;1.51
+2026-09-28 10:58:35;anomali;Ditolak;0.4497;44;;;1.43
+2026-09-28 10:58:46;anomali;Ditolak;0.5678;56;;;2.08
+2026-09-28 10:58:56;anomali;Ditolak;0.3439;34;;;1.62
+2026-09-28 10:59:07;anomali;Ditolak;0.3503;35;;;1.63
+2026-09-28 10:59:16;anomali;Ditolak;0.3138;31;;;1.49
+2026-09-28 16:03:27;anomali;Ditolak;0.6493;64;;;1.28
+2026-09-28 16:03:35;anomali;Ditolak;0.636;63;;;1.42
+2026-09-28 16:03:47;anomali;Ditolak;0.6789;67;;;1.25
+2026-09-28 16:03:55;anomali;Ditolak;0.5833;58;;;1.37
+2026-09-28 16:04:03;anomali;Ditolak;0.6274;62;;;1.35
+2026-09-28 16:04:40;anomali;Ditolak;0.6773;67;;;1.4
+2026-09-28 16:04:48;Hana;Diterima Tutup;0.7711;77;tolong tutup pagar;TUTUP;1.21
+2026-09-28 16:05:03;Hana;Diterima Tutup;0.7789;77;segara tutup pagar;TUTUP;1.56
+2026-09-28 16:05:11;anomali;Ditolak;0.5623;56;;;1.3
+2026-09-28 16:05:17;anomali;Ditolak;0.5043;50;;;1.25
+2026-09-28 16:14:10;anomali;Ditolak;0.2985;29;;;1.44
+2026-09-28 16:14:19;anomali;Ditolak;0.3984;39;;;1.3
+2026-09-28 16:14:31;Hana;Diterima Buka;0.7868;78;tolong buka pagar;BUKA;1.22
+2026-09-28 16:14:39;anomali;Ditolak;0.3844;38;;;1.57
+2026-09-28 16:14:46;anomali;Ditolak;0.4061;40;;;1.33
+2026-09-28 16:15:30;Jannah;Diterima Tutup;0.7994;79;tutup pagar sekarang;TUTUP;1.52
+2026-09-28 16:15:35;anomali;Ditolak;0.4694;46;;;1.35
+2026-09-28 16:15:40;anomali;Ditolak;0.4594;45;;;1.68
+2026-09-28 16:15:56;anomali;Ditolak;0.5994;59;;;1.67
+2026-09-28 16:16:09;anomali;Ditolak;0.455;45;;;1.63
+2026-09-28 17:51:43;anomali;Ditolak;0.5391;53;;;1.65
+2026-09-28 17:51:59;anomali;Ditolak;0.5982;59;;;1.51
+2026-09-28 17:52:06;anomali;Ditolak;0.7024;70;;;1.25
+2026-09-28 17:52:13;Jannah;Diterima Buka;0.7764;86;segera buka pagar;BUKA;1.38
+2026-09-28 17:52:21;anomali;Ditolak;0.7155;71;;;1.28
+2026-09-28 17:52:29;anomali;Ditolak;0.6797;67;;;1.77
+2026-09-28 17:52:34;anomali;Ditolak;0.6858;68;;;1.24
+2026-09-28 17:52:41;anomali;Ditolak;0.6979;69;;;1.32
+2026-09-28 17:52:46;anomali;Ditolak;0.6175;61;;;1.25
+2026-09-28 17:52:51;anomali;Ditolak;0.5847;58;;;1.78
+2026-09-28 19:24:40;anomali;Ditolak;0.3778;37;;;1.36
+2026-09-28 19:24:44;anomali;Ditolak;0.4107;41;;;1.16
+2026-09-28 19:24:48;anomali;Ditolak;0.447;44;;;1.11
+2026-09-28 19:24:52;anomali;Ditolak;0.4131;41;;;1.12
+2026-09-28 19:24:56;anomali;Ditolak;0.436;43;;;1.7
+2026-09-28 19:25:21;anomali;Ditolak;0.4072;40;;;1.79
+2026-09-28 19:25:30;anomali;Ditolak;0.4967;49;;;2.03
+2026-09-28 19:25:33;anomali;Ditolak;0.423;42;;;1.6
+2026-09-28 19:25:42;anomali;Ditolak;0.3173;31;;;1.49
+2026-09-28 19:25:54;anomali;Ditolak;0.281;28;;;1.5
+2026-10-14 08:55:14;Hana;Diterima - Bukan Kata Kunci;0.7724;85;tutup paga;;23.47
+2026-10-14 08:57:56;Hana;Diterima - Gagal Jaringan STT;0.8594;90;;;11.5
+2026-10-14 08:58:43;Hana;Diterima - Bukan Kata Kunci;0.8274;88;tutup paga;;6.79
+2026-10-14 08:58:54;anomali;Ditolak;0.5853;58;;;1.27
+2026-10-14 08:59:02;anomali;Ditolak;0.6823;68;;;1.59
+2026-10-14 08:59:10;Hana;Diterima Tutup;0.7875;86;tutup pagar;TUTUP;1.6
+2026-10-14 08:59:49;anomali;Ditolak;0.596;59;;;5.57
+2026-10-14 09:06:52;anomali;Ditolak;0.7318;73;;;17.5
+2026-10-14 09:07:25;Hana;Diterima Tutup;0.8127;88;tutup pagar;TUTUP;26.49
+2026-10-14 09:07:36;Hana;Diterima Buka;0.8301;89;buka pagar;BUKA;1.27
+2026-10-14 09:07:56;Hana;Diterima - Bukan Kata Kunci;0.8371;89;tutup paga;;1.56
+2026-10-14 09:08:04;Hana;Diterima Tutup;0.8116;88;tutup pagar;TUTUP;1.18
+2026-10-14 09:15:38;anomali;Ditolak;0.7318;73;;;2.76
+2026-10-14 09:15:45;Hana;Diterima Buka;0.7942;86;buka pagar;BUKA;2.03
+2026-10-14 10:30:21;Hana;Diterima Tutup;0.7826;86;tutup pagar;TUTUP;1.73
+2026-10-14 10:32:48;Hana;Diterima Buka;0.7652;85;buka pagar;BUKA;9.45
+2026-10-14 10:33:34;anomali;Ditolak;0.6157;61;;;10.73
+2026-10-14 10:33:57;Hana;Diterima Tutup;0.8358;89;tutup pagar;TUTUP;2.21
+2026-10-14 10:39:25;anomali;Ditolak;0.6574;65;;;8.84
+2026-10-14 10:39:47;Hana;Diterima Buka;0.773;85;buka pagar;BUKA;17.41
+2026-10-14 10:57:25;Hana;Diterima Tutup;0.8171;88;tutup pagar;TUTUP;1.79
+2026-10-14 11:55:18;anomali;Ditolak;0.6838;68;;;2.9
+2026-10-14 11:55:28;anomali;Ditolak;0.7323;73;;;1.84
+2026-10-14 11:55:41;anomali;Ditolak;0.4616;46;;;1.56
+2026-10-14 11:55:53;anomali;Ditolak;0.4681;46;;;1.33
+2026-10-14 11:56:32;anomali;Ditolak;0.6939;69;;;1.61
+2026-10-14 11:57:20;anomali;Ditolak;0.6576;65;;;1.8
+2026-10-15 18:28:34;anomali;Ditolak;0.7298;72;;;3.61
+2026-10-15 18:28:43;Hana;Diterima Buka;0.765;85;buka pagar;BUKA;4.09
+2026-10-15 18:31:19;anomali;Ditolak;0.6944;69;;;13.76
+2026-10-15 18:33:33;Hana;Diterima Buka;0.7967;87;buka pagar;BUKA;10.29
+2026-10-15 18:33:51;Hana;Diterima Tutup;0.7722;85;tutup pagar;TUTUP;3.8
+2026-10-15 18:34:19;Hana;Diterima Buka;0.7882;86;buka pagar;BUKA;19.06
+2026-10-15 18:35:04;anomali;Ditolak;0.6565;65;;;1.96
+2026-10-15 18:35:10;Hana;Diterima - Bukan Kata Kunci;0.7833;86;tutup paga;;1.47
+2026-10-15 18:35:18;Hana;Diterima Tutup;0.7723;85;tutup pagar;TUTUP;1.49
+2026-10-15 18:35:54;Hana;Diterima Buka;0.7842;86;buka pagar;BUKA;1.71
+2026-10-15 18:36:11;Hana;Diterima Tutup;0.8574;90;tutup pagar;TUTUP;1.65
+2026-10-16 15:28:44;anomali;Ditolak;0.707;70;;;1.74
+2026-10-16 15:29:24;Hana;Diterima Buka;0.8199;88;buka pagar;BUKA;1.19
